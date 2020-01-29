@@ -28,7 +28,7 @@ void setLed(uint16_t newdata)
     digitalWrite(clk_pin, LOW);
   }
   digitalWrite(latch_pin, HIGH);
-  delay(100);
+  delay(analogRead(potent));
 }
 
 int count = 0;
@@ -49,5 +49,4 @@ void loop()
     count = 0;
   if (count < 0)
     count = 15;
-  delay(analogRead(potent));
 }
