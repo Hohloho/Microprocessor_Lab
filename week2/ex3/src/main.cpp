@@ -4,6 +4,8 @@ const int latch_pin = 10; //STCP
 const int data_pin = 11;  //DS
 const int button1 = 2;
 const int button2 = 3;
+const int potent = A0;
+
 
 void setup()
 {
@@ -47,4 +49,5 @@ void loop()
     count = 0;
   if (count < 0)
     count = 15;
+  delay(analogRead(potent));
 }
