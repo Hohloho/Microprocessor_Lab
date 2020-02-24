@@ -33,7 +33,8 @@ void loop() {
   {
     digitalWrite(ledPin,LOW);
   }
-  if(minute==2) Serial.println("End");
+  if(minute==2&&second==0) Serial.println("End");
   printDateTime(now);
   delay(1000);
+  
 }
