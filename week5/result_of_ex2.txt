@@ -1,0 +1,11 @@
+From the experiment I can see that the difference between 2 function(RTC and Delay)
+The result is it isn't equal. In my conclusion I conclude that the delay function is a bit delay
+from what RTC function give me. From the start it might look like it's equal but later on I can see the difference very clearly.
+I can see 2 caused here
+
+1.The counting - The time from RTC and time from delay might have different calculating way so that 
+caused the gap betweem those two function. At frst it might not be obvious because the gap is very small
+but it raisee the gap higher after some times, then at that moment the gap became more clear.
+2.Human error - Since I used myself to count and press the time from stopwatch. I can't press the time to 
+exactly match the time from the computer. At first the time gap is very small but at the nearly end those gap 
+became bigger. So that's why I conclude human error too.
