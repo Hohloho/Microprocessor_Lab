@@ -5,7 +5,6 @@
 ThreeWire myWire(4,5,2); // IO, SCLK, CE 
 RtcDS1302<ThreeWire> Rtc(myWire);
 int ledPin = 13;
-byte prevSec = 0;
 
 void printDateTime(const RtcDateTime& dt){ 
   Serial.print("Total minutes : ");
@@ -25,18 +24,16 @@ void setup() {
 
 void loop() {
   RtcDateTime now = Rtc.GetDateTime();
-  printDateTime(now);
   int second = now.Second();
   int minute = now.Minute();
-  if second = 0; 
+  if (second==0 && minute==0) Serial.println("Start");
   if(second%2==0){
     digitalWrite(ledPin,HIGH);
   }else
   {
     digitalWrite(ledPin,LOW);
   }
-  if(minute=2){
-    Serial.println("End")
-  }
+  if(minute==2) Serial.println("End");
+  printDateTime(now);
   delay(1000);
 }
