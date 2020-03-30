@@ -44,7 +44,7 @@ void setup(){
  
   Serial.begin(9600);
   attachInterrupt(digitalPinToInterrupt(EN_A), check_value, FALLING);
-   attachInterrupt(digitalPinToInterrupt(EN_B), check_value, FALLING);
+  attachInterrupt(digitalPinToInterrupt(EN_B), check_value, FALLING);
 }
 
 void speed(int speed){
