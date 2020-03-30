@@ -1,3 +1,4 @@
+#include<Arduino.h>
 #define MOTOR_D1_PIN 7
 #define MOTOR_D2_PIN 8
 #define MOTOR_PWM_PIN 9
@@ -5,14 +6,13 @@
 #define EN_A 2
 #define EN_B 3
 
-int count = 0;
+bool curA = 0; 
+bool curB = 0; 
+bool preA = 0; 
+bool preB = 0; 
 
-bool EN_curA = false; 
-bool EN_curB = false; 
-bool EN_preA = false; 
-bool EN_preB = false; 
-
-void EN_dir(bool dir){
+void check_dir(bool dir){
+  static int count = 0;
   if(dir) {
     count++;
     Serial.println("Count = " + String(count) + " Direction: clockwise");
@@ -23,15 +23,16 @@ void EN_dir(bool dir){
   }
 }
 
-void EN_Check(){ // Call when encoder rotating 
-    EN_curA = !digitalRead(EN_A);
-    EN_curB = !digitalRead(EN_B);
-    if(EN_curA&&EN_curB){
-        if(EN_preA&&!EN_preB) EN_dir(1);
-        else if(!EN_preA&&EN_preB) EN_dir(0);
+void check_value(){
+    curA = !digitalRead(EN_A);
+    curB = !digitalRead(EN_B);
+    if(curA && curB){
+        if((preA == 1) && (preB == 0)) check_dir(1);
+        else if((preA == 0) && (preB == 1)) check_dir(0);
     }
-    EN_preA = EN_curA;
-    EN_preB = EN_curB;
+  
+    preA = curA;
+    preB = curB;
 }
 
 void setup(){
@@ -42,8 +43,8 @@ void setup(){
   pinMode(EN_B, INPUT_PULLUP);
  
   Serial.begin(9600);
-  attachInterrupt(digitalPinToInterrupt(EN_A), EN_Check, FALLING);
-   attachInterrupt(digitalPinToInterrupt(EN_B), EN_Check, FALLING);
+  attachInterrupt(digitalPinToInterrupt(EN_A), check_value, FALLING);
+   attachInterrupt(digitalPinToInterrupt(EN_B), check_value, FALLING);
 }
 
 void speed(int speed){
@@ -59,12 +60,6 @@ void speed(int speed){
 }
 
 void loop(){
-  speed(1);
-  delay(1000);
-  speed(2);
-  delay(1000);
-  speed(-1);
-  delay(1000);
-  speed(-2);
-  delay(1000);
+  speed(200);
+  delay(100);
 }
